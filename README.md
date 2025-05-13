@@ -1,106 +1,121 @@
-# 📰 Fake News Detection using NLP & Machine Learning
+# Fake News Detection
 
-This project focuses on building a **fake news detection system** using Natural Language Processing (NLP) and Machine Learning techniques to automatically classify news articles as *real* or *fake*. It aims to combat misinformation spread across digital platforms and social media.
+## Overview
+This project implements a fake news detection system using a Naive Bayes classifier. The model analyzes text data from news articles to classify them as **Fake (0)** or **Real (1)**. The pipeline includes text preprocessing, TF-IDF vectorization, model training, and evaluation.
 
-## 📌 Problem Statement
+## Dataset
+The dataset used is `fake_news_dataset.csv`, which contains news articles with the following columns:
+- `text`: The content of the news article.
+- `label`: The target variable (0 for Fake, 1 for Real).
 
-The rapid spread of misinformation poses serious threats to society, democracy, and trust in media. Manual fact-checking is slow and unsustainable. This project proposes an automated system for **binary classification of news articles** using textual features and machine learning models.
+**Note**: Replace `fake_news_dataset.csv` with your dataset path. The dataset is assumed to be structured with text and label columns.
 
----
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/fake-news-detection.git
+   cd fake-news-detection
+   ```
 
-## 🎯 Objectives
+2. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-- Detect fake news using NLP techniques.
-- Preprocess and analyze real-world news datasets.
-- Engineer relevant features from text and metadata.
-- Train multiple classification models and evaluate their performance.
-- Visualize model insights to support public awareness.
+3. Download NLTK stopwords:
+   ```python
+   import nltk
+   nltk.download('stopwords')
+   ```
 
----
+## Dependencies
+- Python 3.8+
+- pandas
+- numpy
+- nltk
+- scikit-learn
+- regex (re)
 
-## 🧠 Type of Problem
+Install dependencies using:
+```bash
+pip install pandas numpy nltk scikit-learn
+```
 
-- Binary Classification (Fake vs Real)
-- Supervised Machine Learning
-- Natural Language Processing (Text Classification)
-- Social Media Analytics / Information Integrity
+## Usage
+1. **Prepare the Dataset**: Ensure `fake_news_dataset.csv` is in the project directory or update the file path in the script.
 
----
+2. **Run the Script**: Execute the main script to train the model and evaluate its performance:
+   ```bash
+   python fake_news_detection.py
+   ```
 
-## 📂 Dataset
+3. **Output**:
+   - The script prints the model's accuracy and a detailed classification report (precision, recall, F1-score).
+   - It also predicts the label for a sample news headline:  
+     Example: `"Breaking news! Scientists discover AI with human-level sarcasm!"`
 
-**Type**:  
-- Unstructured Text: Title, content, etc.  
-- Structured Metadata (optional): Author, date, topic
+4. **Custom Predictions**:
+   - Modify the `new_text` list in the script to test new articles:
+     ```python
+     new_text = ["Your custom news article here"]
+     ```
 
-**Target Variable**: `Label`  
-- Fake = 0, Real = 1  
+## Code Explanation
+The script (`fake_news_detection.py`) performs the following steps:
 
-**Sources**:  
-- Public datasets from Kaggle, LIAR, FakeNewsNet, etc.
+1. **Load Dataset**:
+   - Reads the CSV file using pandas.
 
----
+2. **Text Preprocessing**:
+   - Converts text to lowercase.
+   - Removes special characters and extra spaces using regex.
+   - Eliminates stopwords using NLTK's stopwords list.
+   - Stores cleaned text in a new column `clean_text`.
 
-## 🔧 Data Preprocessing
+3. **Vectorization**:
+   - Uses `TfidfVectorizer` to convert text into numerical features (TF-IDF scores).
+   - Limits to 5,000 features to manage computational complexity.
 
-- Handle missing values
-- Remove duplicates
-- Normalize text (lowercase, punctuation removal, etc.)
-- Encode categorical features (author, subject)
-- Convert data types (e.g., string to datetime)
+4. **Train-Test Split**:
+   - Splits data into 80% training and 20% testing sets with a fixed random state for reproducibility.
 
----
+5. **Model Training**:
+   - Trains a `MultinomialNB` (Naive Bayes) classifier, suitable for text classification.
 
-## 📊 Exploratory Data Analysis (EDA)
+6. **Evaluation**:
+   - Computes accuracy and generates a classification report with precision, recall, and F1-score.
 
-- Univariate analysis: distribution of labels, article length
-- Bivariate analysis: article length vs label
-- Multivariate analysis: topic distribution, TF-IDF clustering, correlation matrix
+7. **Prediction**:
+   - Processes a new text sample through the same pipeline (cleaning, vectorization) and predicts its label.
 
----
+## Example Output
+```plaintext
+Accuracy: 0.85
+Classification Report:
+              precision    recall  f1-score   support
+           0       0.84      0.87      0.85      1000
+           1       0.86      0.83      0.85      1000
+    accuracy                           0.85      2000
+   macro avg       0.85      0.85      0.85      2000
+weighted avg       0.85      0.85      0.85      2000
 
-## 🏗️ Feature Engineering
+Prediction (0=Fake, 1=Real): [0]
+```
 
-**Text Features:**
-- Word count, sentence count, punctuation count
-- Stopword ratio, sentiment scores (TextBlob/VADER)
-- TF-IDF vectors, word embeddings (Word2Vec, BERT)
+## Future Improvements
+- Experiment with advanced models (e.g., Logistic Regression, SVM, or deep learning models like LSTM).
+- Incorporate additional features (e.g., article metadata, author credibility).
+- Handle imbalanced datasets using techniques like SMOTE.
+- Add cross-validation for robust performance evaluation.
 
-**Metadata Features (if available):**
-- Encoded author/topic
-- Publishing date features (day, month, etc.)
+## Contributing
+Contributions are welcome! Please:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a pull request.
 
----
-
-## 🤖 Model Building
-
-- Baseline Models: Logistic Regression, Naive Bayes
-- Advanced Models: Random Forest, SVM, XGBoost
-- Deep Learning: LSTM, GRU, CNN
-- Transformers: BERT, RoBERTa (using HuggingFace)
-
-**Evaluation Metrics:**
-- Accuracy, Precision, Recall, F1-Score
-- Confusion Matrix, ROC Curve, Precision-Recall Curve
-
----
-
-## 📈 Visualization & Insights
-
-- Confusion matrix for performance visualization
-- ROC and PR curves for threshold analysis
-- Feature importance for model interpretability
-
-
-## 🛠️ Tools and Technologies
-
-- **Language**: Python
-- **Libraries**: pandas, numpy, scikit-learn, seaborn, matplotlib, xgboost, plotly
-- **NLP Tools**: NLTK, spaCy, HuggingFace Transformers
-- **Development**: Jupyter Notebook, Google Colab
-- **Version Control**: Git & GitHub
-
----
 
 ## 👥 Team Members & Contributions
 
