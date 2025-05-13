@@ -92,31 +92,6 @@ The rapid spread of misinformation poses serious threats to society, democracy, 
 - Feature importance for model interpretability
 
 
-GitHub supports Mermaid diagrams if enabled by the user or GitHub settings.
-
----
-
-### 📌 Final README Section Snippet
-
-Here’s how it fits into your full README:
-
-```markdown
-## 🧭 Project Flowchart
-
-```mermaid
-flowchart TD
-    A[Start] --> B[Load Dataset]
-    B --> C[Preprocess Data]
-    C --> D[Exploratory Data Analysis]
-    D --> E[Feature Engineering]
-    E --> F[Model Building]
-    F --> G[Model Evaluation]
-    G --> H[Visualization & Insights]
-    H --> I[End]
-
-
----
-
 ## 🛠️ Tools and Technologies
 
 - **Language**: Python
@@ -138,11 +113,9 @@ flowchart TD
 
 ## 🔗 GitHub Repository
 
-[👉 Click here to view the project on GitHub](https://github.com/sanj2006/fake-news-detection)
+(https://github.com/8610449583/Exposing-the-truth-with-advanced-fake-news-detection-powered-by-natural-language-processing)
 
 ---
 
-## 📅 Date of Submission
-
-**10/05/2025**  
+## College Name
 Sri Ramanujar Engineering College – CSE Department  
